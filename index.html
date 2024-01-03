@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Play&family=Teko:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.148.0/three.min.js"></script>
+</head>
+
+<body>
+
+  <script defer src="./UIComponents/slider.js"></script>
+  <script defer src="./UIComponents/download.js"></script>
+  <script defer src="NoiseMapGeneration.js"></script>
+  <script defer src="3DPreview.js"></script>
+
+  <main class="dashboard">
+
+    <h1 class="noise-dashboard-title">Generate your own <a href="https://dev.to/thormeier/create-useful-noise-patterns-with-academy-award-winning-ken-perlin-3fc6" target="_blank">Noise Map</a></h1>
+
+    <section class="noise-dashboard-subtitle-box" style="margin-top: 8%">
+      <h2 class="noise-dashboard-subtitle">Intensity</h2>
+      <h2 class="noise-dashboard-subtitle" id="intensity-value">12</h2>
+    </section>
+    <input type="range" class="noise-dashboard-input-range" id="intensity" value="12" min="1" max="200" oninput="updateSliderValueByColor(this); updateSliderValueByText(this, 'intensity-value')" onchange="changeIntensity(this)">
+
+    <section class="noise-dashboard-subtitle-box">
+      <h2 class="noise-dashboard-subtitle">Fadedness</h2>
+      <h2 class="noise-dashboard-subtitle" id="fadedness-value">6</h2>
+    </section>
+    <input type="range" class="noise-dashboard-input-range" id="fadedness" value="6" min="0" max="20" oninput="updateSliderValueByColor(this); updateSliderValueByText(this, 'fadedness-value')" onchange="changeFadedness(this)">
+
+    <section class="noise-dashboard-subtitle-box">
+      <h2 class="noise-dashboard-subtitle">Randomness</h2>
+      <h2 class="noise-dashboard-subtitle" id="randomness-value">0</h2>
+    </section>
+    <input type="range" class="noise-dashboard-input-range" id="randomness" value="0" min="0" max="20" oninput="updateSliderValueByColor(this); updateSliderValueByText(this, 'randomness-value')" onchange="changeRandomness(this)">
+
+    <section class="noise-dashboard-checkbox-box">
+      <h2 class="noise-dashboard-subtitle">Invert Colors</h2>
+      <input type="checkbox" onclick="changeInvertedColorStatus(this)">
+      <h2 class="noise-dashboard-color-subtitle">Color 1</h2>
+      <input type="color" value="#ffffff" id="color-1" onchange="changeColors()">
+      <h2 class="noise-dashboard-color-subtitle">Color 2</h2>
+      <input type="color" value="#000000" id="color-2" onchange="changeColors()">
+    </section>
+
+    <section class="noise-dashboard-buttons">
+      <button class="noise-dashboard-button" onclick="paintCanvasWithNoise(); update3DNoiseMapWithGeneratedNoiseMap()" id="generate">Generate</button>
+      <a download="map.jpg" class="noise-dashboard-button" onclick="downloadNoiseMap(this)">Download</a>
+    </section>
+    
+  </main>
+
+  <main class="dashboard">
+
+    <div class="noise-map-box" id="noise-canvas-parent">
+
+      <canvas class="noisemap-canvas" id="noise-canvas" width="250px" height="250px"></canvas>
+      
+    </div>
+
+    <div class="noise-map-box-3d">
+
+      <canvas class="noisemap-canvas" id="noise-canvas-3d"></canvas>
+      
+    </div>
+    <p class="noise-map-subtitle">Want to know how noise maps work? <a href="https://dev.to/thormeier/create-useful-noise-patterns-with-academy-award-winning-ken-perlin-3fc6" target="_blank">Click Here</a></p>
+    
+  </main>
+  
+</body>
+
+</html>
